@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Build Docker Image'
                 bat '''
-                    docker build -t form .
+                    docker build --dns 8.8.8.8 --dns 8.8.4.4 -t form .
                 '''
             }
         }
