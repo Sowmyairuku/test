@@ -5,8 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build Docker Image'
+                // Remove --dns flags since BuildKit doesn’t support them
                 bat '''
-                    docker build --dns 8.8.8.8 --dns 8.8.4.4 -t form .
+                    docker build -t form .
                 '''
             }
         }
@@ -24,7 +25,7 @@ pipeline {
 
     post {
         failure {
-            echo 'Pipeline failed. please check the logs.'
+            echo 'Pipeline failed. Please check the logs.'
         }
         success {
             echo 'Pipeline executed successfully.'
